@@ -1,0 +1,22 @@
+/*
+给定一个整数数组nums和一个目标值target，请你在该数组中找出和为目标值的那两个整数，并返回他们的数组下标。
+假设每种输入只会对应一个答案。不能重复利用这个数组中同样的元素。
+*/
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) 
+    {
+        vector<int> ret;
+        for(vector<int>::iterator it1=nums.begin();it1!=nums.end();it1++) //迭代器遍历数组
+        {
+            int sup = target - *it1;
+            vector<int>::iterator it2=find(nums.begin(),nums.end(),sup);
+            if(it2!=nums.end()&&it2!=it1) //不重复利用元素
+            {
+                ret = {it1-nums.begin(),it2-nums.begin()}; //迭代器转化为数组下标
+                return ret;
+            }
+        }
+        return ret;
+    }
+};
