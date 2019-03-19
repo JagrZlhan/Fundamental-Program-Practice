@@ -1,0 +1,41 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+ 
+/******第一版代码**********
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        ListNode* retl;
+        retl=new ListNode(0); //创建新链表
+        int flag=0;
+        while(l1->next!=NULL && l2->next!=NULL)
+        {
+            if(flag==0){
+               retl->val = l1->val+l2->val;  /********==30==ERROR: AddressSanitizer: heap-buffer-overflow*****未知错误***/
+            }else if(flag==1){
+                retl->val = l1->val+l2->val+1;
+                flag=0;
+            }else {
+                cout<<"wrong flag";
+            }
+            
+            if(retl->val>=10)
+            {
+                retl-=10;
+                flag=1;
+            }
+            l1=l1->next; //用->不能用.
+            l2=l2->next;
+            retl->next=new ListNode(0); //移到下一位时仍需new一个节点
+            retl=retl->next;
+        }
+        return retl;
+    }
+};
+********************************/
